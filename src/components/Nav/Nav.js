@@ -20,8 +20,7 @@ const Nav = (props) => (
       {props.user.id && (
         <>
           <Link className="nav-link" to="/info">
-            Info Page
-          </Link>
+            Info Page</Link>
           <Link className="nav-link" to="/shelf">
             View Shelf</Link>
           <Link className="nav-link" to="/shelf">

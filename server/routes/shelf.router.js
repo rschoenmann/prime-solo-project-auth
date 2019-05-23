@@ -6,7 +6,13 @@ const router = express.Router();
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-    res.sendStatus(200); // For testing only, can be removed
+    console.log('is authenticated?:', req.isAuthenticated());
+    console.log('shelf req.user:', req.user);
+
+    // SELECT "user"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"
+    // JOIN "item" ON "user".id = "item".user_id;
+
+
 });
 
 
