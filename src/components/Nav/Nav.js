@@ -24,7 +24,7 @@ const Nav = (props) => (
           </Link>
           <Link className="nav-link" to="/shelf">
             View Shelf</Link>
-          <Link className="nav-link" to="/shelf/form">
+          <Link className="nav-link" to="/shelf">
             Add Item to Shelf</Link>
           <LogOutButton className="nav-link"/>
         </>
