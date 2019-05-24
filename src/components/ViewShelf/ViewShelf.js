@@ -1,14 +1,17 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-class ViewShelf extends Component{
+class ViewShelf extends Component {
 
-	componentDidMount(){
-		this.props.dispatch({type: 'FETCH_SHELF'})
+
+
+
+	componentDidMount() {
+		this.props.dispatch({ type: 'FETCH_SHELF' })
 	}
 
-	render(){
-		return(
+	render() {
+		return (
 			<div>
 				<h2>Baconian Shelf!</h2>
 				<p>Here all all the items people have added to the shelf:</p>
@@ -24,7 +27,7 @@ class ViewShelf extends Component{
 					</thead>
 					<tbody>
 						{this.props.state.viewShelfReducer.map((item) => {
-							return(
+							return (
 								<tr>
 									<td>{item.username}</td>
 									<td>{item.description}</td>
