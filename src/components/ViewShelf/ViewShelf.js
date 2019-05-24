@@ -37,7 +37,7 @@ class ViewShelf extends Component {
 
 								
 
-								deleteDisplay = (<button onClick={() => this.deleteItem(item.itemid)}>Delete Item</button>)
+								deleteDisplay = (<Button onClick={() => this.deleteItem(item.itemid)}>Delete Item</Button>)
 
 							} else {
 								deleteDisplay = (`You can't delete this!`)
