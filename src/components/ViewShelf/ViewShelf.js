@@ -9,8 +9,9 @@ class ViewShelf extends Component {
 		this.props.dispatch({ type: 'FETCH_SHELF' })
 	}
 
-	handleClick = (event) => {
-		
+	deleteItem = (itemid) => {
+		console.log('handleClick itemid:', itemid);
+		this.props.dispatch({type: 'DELETE_ITEM', payload: itemid})
 	}
 
 	render(){
@@ -33,16 +34,24 @@ class ViewShelf extends Component {
 					<TableBody>
 						{this.props.shelf.map((item) => {
 							if (this.props.user.id === item.userid) {
-								deleteDisplay = (<Button onClick={this.handleClick}>Delete Item</Button>)
+
+								
+
+								deleteDisplay = (<button onClick={() => this.deleteItem(item.itemid)}>Delete Item</button>)
+
 							} else {
 								deleteDisplay = (`You can't delete this!`)
 							}
 							return(
+
 								<tr>
 									<TableCell>{item.username}</TableCell>
 									<TableCell>{item.description}</TableCell>
 									<TableCell><img className="image" src={item.image_url} alt={item.description}/></TableCell>
 									<TableCell>{deleteDisplay}</TableCell>
+
+								
+
 								</tr>
 							)
 						})}

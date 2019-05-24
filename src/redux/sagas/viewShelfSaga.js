@@ -3,12 +3,12 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 function* fetchViewShelf() {
     try {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
+        // const config = {
+        //     headers: { 'Content-Type': 'application/json' },
+        //     withCredentials: true,
+        // };
 
-        const response = yield axios.get('api/shelf', config);
+        const response = yield axios.get('api/shelf');
 
         yield put({ type: 'SET_SHELF', payload: response.data });
         console.log(response.data);
@@ -18,14 +18,11 @@ function* fetchViewShelf() {
     }
 }
 
-function* deleteItem() {
+function* deleteItem(action) {
     try {
-        const config = {
-            headers: { 'Content-Type': 'application/json'},
-            withCredentials: true,
-        };
-        const response = yield axios.delete('api/shelf', config);
-        yield put({type: 'SET_SHELF', payload: response.data});
+        console.log('deleteItem action.payload:', action.payload);
+        yield axios.delete(`api/shelf/${action.payload}`);
+        yield put({type: 'FETCH_SHELF'});
     } catch (error) {
         console.log('Delete Request Failed (deleteItem)', error);
     }
