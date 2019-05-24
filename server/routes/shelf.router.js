@@ -14,7 +14,21 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-
+    if(req.isAuthenticated()) {
+        console.log('Is authenticated?', req.isAuthenticated());
+        console.log(req.body);
+        let queryText = `INSERT INTO "item" ("description", "image_url") VALUES ($1, $2);`;
+        let item = req.body;
+        pool.query(queryText, [item.description, item.image_url])
+        .then(() => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('Error in POST route.', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 
