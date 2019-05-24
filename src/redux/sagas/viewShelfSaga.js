@@ -11,6 +11,8 @@ function* fetchViewShelf() {
         const response = yield axios.get('api/shelf', config);
 
         yield put({ type: 'SET_SHELF', payload: response.data });
+        console.log(response.data);
+        
     } catch (error) {
         console.log('Get Request Failed (fetchShelf)', error);
     }
