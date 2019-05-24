@@ -26,10 +26,8 @@ const Nav = (props) => (
 
           <Link className="nav-link" to="/shelf/count">
             Total Items</Link>
-          <Link className="nav-link" to="/shelf">
-
           <Link className="nav-link" to="/shelf/form">
-
+          
             Add Item to Shelf</Link>
           <LogOutButton className="nav-link"/>
         </>
