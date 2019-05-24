@@ -11,12 +11,6 @@ class ViewShelf extends Component{
 		let deleteDisplay;
 		console.log('this.props.user', this.props.user)
 		console.log('this.props.shelf', this.props.shelf);
-
-		// if(this.props.user.id === this.props.shelf.item.userid){
-		// 	deleteDisplay = (<button>Delete Item</button>)
-		// }else{
-		// 	deleteDisplay = (`You can't delete this!`)
-		// }
 		return(
 			<div>
 				<h2>Baconian Shelf!</h2>
@@ -32,6 +26,11 @@ class ViewShelf extends Component{
 					</thead>
 					<tbody>
 						{this.props.shelf.map((item) => {
+							if (this.props.user.id === item.userid) {
+								deleteDisplay = (<button>Delete Item</button>)
+							} else {
+								deleteDisplay = (`You can't delete this!`)
+							}
 							return(
 								<tr>
 									<td>{item.username}</td>
