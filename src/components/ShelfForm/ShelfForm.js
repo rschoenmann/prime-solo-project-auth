@@ -29,6 +29,8 @@ export class ShelfForm extends Component {
     }
 
     render() {
+        console.log(this.state);
+        
         return (
             <div>
                 <form>

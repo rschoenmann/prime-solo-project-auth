@@ -1,12 +1,24 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * Get all of the items on the shelf
  */
-router.get('/', (req, res) => {
-    res.sendStatus(200); // For testing only, can be removed
+router.get('/', rejectUnauthenticated, (req, res) => {
+    console.log('is authenticated?:', req.isAuthenticated());
+    console.log('shelf req.user:', req.user);
+    let queryText = `SELECT "user"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"
+        JOIN "item" ON "user".id = "item".user_id;`;
+    pool.query(queryText)
+    .then((results) => {
+        console.log('results.row:', results.rows);
+        res.send(results.rows)
+    }).catch(error => {
+        console.log('error in shelf GET:', error);
+        res.sendStatus(500);
+    });
 });
 
 
@@ -14,7 +26,23 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-
+    if(req.isAuthenticated()) {
+        console.log('Is authenticated?', req.isAuthenticated());
+        console.log(req.body);
+        let queryText = `INSERT INTO "item" ("description", "image_url", "user_id") VALUES ($1, $2, $3);`;
+        let item = req.body;
+        console.log(req.user);
+        
+        pool.query(queryText, [item.description, item.url, req.user.id])
+        .then(() => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('Error in POST route.', error);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 
