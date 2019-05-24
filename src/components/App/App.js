@@ -17,7 +17,10 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import ViewShelf from '../ViewShelf/ViewShelf';
+
 import TotalItems from '../TotalItems/TotalItems';
+import ShelfForm from '../ShelfForm/ShelfForm';
+
 
 import './App.css';
 
@@ -66,6 +69,12 @@ class App extends Component {
               exact path="/shelf/count"
               component={TotalItems}
             />
+
+            <ProtectedRoute
+              exact path = "/shelf/form"
+              component = {ShelfForm}
+              />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

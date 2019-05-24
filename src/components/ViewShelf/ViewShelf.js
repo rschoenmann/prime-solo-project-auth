@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import './ViewShelf.css';
 
-class ViewShelf extends Component{
 
-	componentDidMount(){
-		this.props.dispatch({type: 'FETCH_SHELF'})
+class ViewShelf extends Component {
+
+	componentDidMount() {
+		this.props.dispatch({ type: 'FETCH_SHELF' })
+	}
+
+	handleClick = (event) => {
+		
 	}
 
 	render(){
+		let deleteDisplay;
+		console.log('this.props.user', this.props.user)
+		console.log('this.props.shelf', this.props.shelf);
 		return(
 			<div>
 				<h2>Baconian Shelf!</h2>
@@ -16,20 +25,24 @@ class ViewShelf extends Component{
 					<thead>
 						<tr>
 							<th>User</th>
-							<th>Item Name</th>
 							<th>Item Description</th>
 							<th>Image</th>
 							<th>Delete Item?</th>
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.state.viewShelfReducer.map((item) => {
+						{this.props.shelf.map((item) => {
+							if (this.props.user.id === item.userid) {
+								deleteDisplay = (<button onClick={this.handleClick}>Delete Item</button>)
+							} else {
+								deleteDisplay = (`You can't delete this!`)
+							}
 							return(
 								<tr>
 									<td>{item.username}</td>
 									<td>{item.description}</td>
-									<td>{item.image_url}</td>
-									<td><button>DELETE ITEM</button></td>
+									<td><img className="image" src={item.image_url} alt={item.description}/></td>
+									<td>{deleteDisplay}</td>
 								</tr>
 							)
 						})}
@@ -41,8 +54,9 @@ class ViewShelf extends Component{
 }
 
 const mapStateToProps = state => ({
-	state
+	user: state.user,
+	shelf: state.viewShelfReducer
 });
 
-// this allows us to use <App /> in index.js
+
 export default connect(mapStateToProps)(ViewShelf);
