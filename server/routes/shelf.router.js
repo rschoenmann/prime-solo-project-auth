@@ -22,10 +22,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-
-
-
-
 /**
  * Add an item for the logged in user to the shelf
  */
@@ -53,10 +49,9 @@ router.post('/', (req, res) => {
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id', (req, res) => {
-    if(req.isAuthenticated()) {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
         console.log('is authenticated?', req.isAuthenticated());
-        console.log(req.params);
+        console.log('req.params:', req.params);
         let queryText = `DELETE FROM "item" WHERE "item"."id" = $1`;
         pool.query(queryText, [req.params.id])
         .then(() => {
@@ -65,9 +60,6 @@ router.delete('/:id', (req, res) => {
             console.log('Error in delete router', error);
             res.sendStatus(500);
         })        
-    } else {
-        res.sendStatus(403);
-    }
 });
 
 

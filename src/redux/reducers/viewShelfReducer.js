@@ -2,10 +2,9 @@ const viewShelfReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SHELF':
             return action.payload;
-        case 'DELETE_ITEM':
-            
+        default:
+            return state; 
     }
-    return state
 };
 
 export default viewShelfReducer;

@@ -22,7 +22,7 @@ function* deleteItem(action) {
     try {
         console.log('deleteItem action.payload:', action.payload);
         yield axios.delete(`api/shelf/${action.payload}`);
-        yield put({type: 'SET_SHELF'});
+        yield put({type: 'FETCH_SHELF'});
     } catch (error) {
         console.log('Delete Request Failed (deleteItem)', error);
     }
