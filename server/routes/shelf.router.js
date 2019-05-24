@@ -52,8 +52,9 @@ router.post('/', (req, res) => {
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
         console.log('is authenticated?', req.isAuthenticated());
         console.log('req.params:', req.params);
-        let queryText = `DELETE FROM "item" WHERE "item"."id" = $1`;
-        pool.query(queryText, [req.params.id])
+        let queryText = `DELETE FROM "item" WHERE "item"."id" = $1
+        AND "item".user_id = $2`;
+        pool.query(queryText, [req.params.id, req.user.id])
         .then(() => {
             res.sendStatus(200);
         }).catch(error => {
