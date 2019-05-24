@@ -36,7 +36,7 @@ class ViewShelf extends Component{
 								<tr>
 									<td>{item.username}</td>
 									<td>{item.description}</td>
-									<td><img src={item.image_url} alt={item.description}/></td>
+									<td><img className="image" src={item.image_url} alt={item.description}/></td>
 									<td>{deleteDisplay}</td>
 								</tr>
 							)
