@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './ViewShelf.css';
 
-class ViewShelf extends Component{
 
-	componentDidMount(){
-		this.props.dispatch({type: 'FETCH_SHELF'})
+class ViewShelf extends Component {
+
+
+
+
+	componentDidMount() {
+		this.props.dispatch({ type: 'FETCH_SHELF' })
 	}
+
 
 	render(){
 		let deleteDisplay;
@@ -53,5 +58,5 @@ const mapStateToProps = state => ({
 	shelf: state.viewShelfReducer
 });
 
-// this allows us to use <App /> in index.js
+
 export default connect(mapStateToProps)(ViewShelf);
