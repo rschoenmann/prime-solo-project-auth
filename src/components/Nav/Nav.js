@@ -23,7 +23,7 @@ const Nav = (props) => (
             Info Page</Link>
           <Link className="nav-link" to="/shelf">
             View Shelf</Link>
-          <Link className="nav-link" to="/shelf">
+          <Link className="nav-link" to="/shelf/form">
             Add Item to Shelf</Link>
           <LogOutButton className="nav-link"/>
         </>

@@ -33,9 +33,11 @@ router.post('/', (req, res) => {
     if(req.isAuthenticated()) {
         console.log('Is authenticated?', req.isAuthenticated());
         console.log(req.body);
-        let queryText = `INSERT INTO "item" ("description", "image_url") VALUES ($1, $2);`;
+        let queryText = `INSERT INTO "item" ("description", "image_url", "user_id") VALUES ($1, $2, $3);`;
         let item = req.body;
-        pool.query(queryText, [item.description, item.image_url])
+        console.log(req.user);
+        
+        pool.query(queryText, [item.description, item.url, req.user.id])
         .then(() => {
             res.sendStatus(201);
         }).catch(error => {
