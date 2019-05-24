@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './ViewShelf.css';
-
+import {Button, Table, TableBody, TableCell, TableHead, TableRow} from '@material-ui/core';
 
 class ViewShelf extends Component {
 
@@ -21,33 +21,33 @@ class ViewShelf extends Component {
 			<div>
 				<h2>Baconian Shelf!</h2>
 				<p>Here all all the items people have added to the shelf:</p>
-				<table>
-					<thead>
-						<tr>
-							<th>User</th>
-							<th>Item Description</th>
-							<th>Image</th>
-							<th>Delete Item?</th>
-						</tr>
-					</thead>
-					<tbody>
+				<Table>
+					<TableHead>
+						<TableRow>
+							<TableCell>User</TableCell>
+							<TableCell>Item Description</TableCell>
+							<TableCell>Image</TableCell>
+							<TableCell>Delete Item?</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
 						{this.props.shelf.map((item) => {
 							if (this.props.user.id === item.userid) {
-								deleteDisplay = (<button onClick={this.handleClick}>Delete Item</button>)
+								deleteDisplay = (<Button onClick={this.handleClick}>Delete Item</Button>)
 							} else {
 								deleteDisplay = (`You can't delete this!`)
 							}
 							return(
 								<tr>
-									<td>{item.username}</td>
-									<td>{item.description}</td>
-									<td><img className="image" src={item.image_url} alt={item.description}/></td>
-									<td>{deleteDisplay}</td>
+									<TableCell>{item.username}</TableCell>
+									<TableCell>{item.description}</TableCell>
+									<TableCell><img className="image" src={item.image_url} alt={item.description}/></TableCell>
+									<TableCell>{deleteDisplay}</TableCell>
 								</tr>
 							)
 						})}
-					</tbody>
-				</table>
+					</TableBody>
+				</Table>
 			</div>
 		)
 	}
