@@ -1,11 +1,12 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * Get all of the items on the shelf
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     console.log('is authenticated?:', req.isAuthenticated());
     console.log('shelf req.user:', req.user);
     let queryText = `SELECT "user"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"

@@ -19,6 +19,7 @@ class ViewShelf extends Component{
 							<th>Item Name</th>
 							<th>Item Description</th>
 							<th>Image</th>
+							<th>Delete Item?</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -28,6 +29,7 @@ class ViewShelf extends Component{
 									<td>{item.username}</td>
 									<td>{item.description}</td>
 									<td>{item.image_url}</td>
+									<td><button>DELETE ITEM</button></td>
 								</tr>
 							)
 						})}
