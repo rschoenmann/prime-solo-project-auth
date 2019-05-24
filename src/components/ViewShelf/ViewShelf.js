@@ -8,6 +8,15 @@ class ViewShelf extends Component{
 	}
 
 	render(){
+		let deleteDisplay;
+		console.log('this.props.user', this.props.user)
+		console.log('this.props.shelf', this.props.shelf);
+
+		// if(this.props.user.id === this.props.shelf.item.userid){
+		// 	deleteDisplay = (<button>Delete Item</button>)
+		// }else{
+		// 	deleteDisplay = (`You can't delete this!`)
+		// }
 		return(
 			<div>
 				<h2>Baconian Shelf!</h2>
@@ -16,20 +25,19 @@ class ViewShelf extends Component{
 					<thead>
 						<tr>
 							<th>User</th>
-							<th>Item Name</th>
 							<th>Item Description</th>
 							<th>Image</th>
 							<th>Delete Item?</th>
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.state.viewShelfReducer.map((item) => {
+						{this.props.shelf.map((item) => {
 							return(
 								<tr>
 									<td>{item.username}</td>
 									<td>{item.description}</td>
-									<td>{item.image_url}</td>
-									<td><button>DELETE ITEM</button></td>
+									<td><img src={item.image_url} alt={item.description}/></td>
+									<td>{deleteDisplay}</td>
 								</tr>
 							)
 						})}
@@ -41,7 +49,8 @@ class ViewShelf extends Component{
 }
 
 const mapStateToProps = state => ({
-	state
+	user: state.user,
+	shelf: state.viewShelfReducer
 });
 
 // this allows us to use <App /> in index.js
