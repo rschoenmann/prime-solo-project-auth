@@ -5,13 +5,13 @@ import './ViewShelf.css';
 
 class ViewShelf extends Component {
 
-
-
-
 	componentDidMount() {
 		this.props.dispatch({ type: 'FETCH_SHELF' })
 	}
 
+	handleClick = (event) => {
+		
+	}
 
 	render(){
 		let deleteDisplay;
@@ -33,7 +33,7 @@ class ViewShelf extends Component {
 					<tbody>
 						{this.props.shelf.map((item) => {
 							if (this.props.user.id === item.userid) {
-								deleteDisplay = (<button>Delete Item</button>)
+								deleteDisplay = (<button onClick={this.handleClick}>Delete Item</button>)
 							} else {
 								deleteDisplay = (`You can't delete this!`)
 							}
