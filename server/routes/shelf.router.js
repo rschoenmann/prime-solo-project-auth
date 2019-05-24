@@ -22,6 +22,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
+
+
+
+
 /**
  * Add an item for the logged in user to the shelf
  */
@@ -64,8 +68,20 @@ router.put('/:id', (req, res) => {
  * Return all users along with the total number of items 
  * they have added to the shelf
  */
-router.get('/count', (req, res) => {
-
+router.get('/count', rejectUnauthenticated, (req, res) => {
+    console.log('is authenticated?:', req.isAuthenticated());
+    console.log('shelf req.user:', req.user);
+    let queryText = `SELECT COUNT(item) AS total_items, "user".username FROM item
+                    FULL OUTER JOIN "user" ON "user".id = item.user_id
+                    GROUP BY "user".username;`;
+    pool.query(queryText)
+        .then((results) => {
+            console.log('results.row:', results.rows);
+            res.send(results.rows)
+        }).catch(error => {
+            console.log('error in shelf GET:', error);
+            res.sendStatus(500);
+        });
 });
 
 
