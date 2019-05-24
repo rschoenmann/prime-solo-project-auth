@@ -2,6 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class ViewShelf extends Component{
+
+	componentDidMount(){
+		this.props.dispatch({type: 'FETCH_SHELF'})
+	}
+
 	render(){
 		return(
 			<div>
@@ -17,12 +22,15 @@ class ViewShelf extends Component{
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><p>this.props.username</p></td>
-							<td><p>this.props.itemName</p></td>
-							<td><p>this.props.itemDescription</p></td>
-							<td><p>this.props.itemImage</p></td>
-						</tr>
+						{this.props.state.viewShelfReducer.map((item) => {
+							return(
+								<tr>
+									<td>{item.username}</td>
+									<td>{item.description}</td>
+									<td>{item.image_url}</td>
+								</tr>
+							)
+						})}
 					</tbody>
 				</table>
 			</div>
