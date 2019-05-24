@@ -8,11 +8,16 @@ const router = express.Router();
 router.get('/', (req, res) => {
     console.log('is authenticated?:', req.isAuthenticated());
     console.log('shelf req.user:', req.user);
-
-    // SELECT "user"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"
-    // JOIN "item" ON "user".id = "item".user_id;
-
-
+    let queryText = `SELECT "user"."id" AS userID, "user"."username", "item".description, "item".image_url, "item".id AS itemID FROM "user"
+        JOIN "item" ON "user".id = "item".user_id;`;
+    pool.query(queryText)
+    .then((results) => {
+        console.log('results.row:', results.rows);
+        res.send(results.rows)
+    }).catch(error => {
+        console.log('error in shelf GET:', error);
+        res.sendStatus(500);
+    });
 });
 
 
